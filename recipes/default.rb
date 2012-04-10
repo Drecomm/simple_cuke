@@ -26,6 +26,7 @@ remote_directory suite_path do
   source 'suite'
   purge true
   recursive true
+  cookbook node['simple_cuke']['suite_cookbook'] if node['simple_cuke']['suite_cookbook']
 end
 
 # code borrowed from https://github.com/btm/minitest-handler-cookbook/blob/master/recipes/default.rb
