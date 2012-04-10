@@ -1,4 +1,4 @@
-class CucumberHandler < Chef::Handler  
+class CucumberHandler < Chef::Handler
   def initialize(options)
     @suite_path = options[:suite_path]
     @reporters_path = options[:reporters_path]
@@ -22,7 +22,7 @@ private
   end
 
   def run_tests
-    report = `cd #{@suite_path} && bundle exec cucumber --tags #{roles_tags}`
+    report = `cd #{@suite_path} && bundle exec cucumber #{cucumber_arguments}`
     return $?.success?, report
   end
 
@@ -40,5 +40,10 @@ private
 
   def roles_tags
     @excluded_roles.map{|role| "~@#{role}"}.join(",")
+  end
+
+  def cucumber_arguments
+    tags = roles_tags
+    "--tags #{tags}" unless tags.empty?
   end
 end
