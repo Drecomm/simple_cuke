@@ -14,6 +14,7 @@ chef_handler 'CucumberHandler' do
             :node_roles     => node['roles'],
             :all_roles      => Chef::Config[:solo] ? [] : search(:role, 'name:*').map{ |role| role.name },
             :reporter       => node['simple_cuke']['reporter']
+  supports :report => true
 end.run_action(:enable)
 
 remote_directory reporters_path do
