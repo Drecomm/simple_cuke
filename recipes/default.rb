@@ -8,13 +8,13 @@ end.run_action(:create)
 
 chef_handler 'CucumberHandler' do
   source handler_path
-  action 'enable'
+  action :nothing
   arguments :suite_path     => suite_path,
             :reporters_path => reporters_path,
             :node_roles     => node['roles'],
             :all_roles      => Chef::Config[:solo] ? [] : search(:role, 'name:*').map{ |role| role.name },
             :reporter       => node['simple_cuke']['reporter']
-end
+end.run_action(:enable)
 
 remote_directory reporters_path do
   source 'reporters'
