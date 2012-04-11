@@ -6,6 +6,12 @@ cookbook_file handler_path do
   source 'cucumber_handler.rb'
 end.run_action(:create)
 
+remote_directory reporters_path do
+  source 'reporters'
+  purge true
+  recursive true
+end.run_action(:create)
+
 chef_handler 'CucumberHandler' do
   source handler_path
   action :nothing
@@ -17,12 +23,6 @@ chef_handler 'CucumberHandler' do
             :reporter       => node['simple_cuke']['reporter']
   supports :report => true
 end.run_action(:enable)
-
-remote_directory reporters_path do
-  source 'reporters'
-  purge true
-  recursive true
-end
 
 remote_directory suite_path do
   source 'suite'
