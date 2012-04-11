@@ -43,7 +43,9 @@ private
   end
 
   def cucumber_arguments
+    args = "--strict"
     tags = roles_tags
-    "--tags #{tags}" unless tags.empty?
+    args << " --tags #{tags}" unless tags.empty?
+    args
   end
 end
