@@ -10,6 +10,7 @@ chef_handler 'CucumberHandler' do
   source handler_path
   action :nothing
   arguments :suite_path     => suite_path,
+            :bundle_path    => node['simple_cuke']['bundle_path'],
             :reporters_path => reporters_path,
             :node_roles     => node['roles'],
             :all_roles      => Chef::Config[:solo] ? [] : search(:role, 'name:*').map{ |role| role.name },

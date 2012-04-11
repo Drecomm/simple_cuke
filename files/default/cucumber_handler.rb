@@ -1,6 +1,7 @@
 class CucumberHandler < Chef::Handler
   def initialize(options)
     @suite_path = options[:suite_path]
+    @bundle_path = options[:bundle_path]
     @reporters_path = options[:reporters_path]
     @excluded_roles = options[:all_roles] - options[:node_roles]
     @reporter = load_reporter(options[:reporter] || :console)
@@ -18,7 +19,7 @@ class CucumberHandler < Chef::Handler
 private
 
   def install_bundle
-    `cd #{@suite_path} && bundle install --deployment`
+    `cd #{@suite_path} && bundle install --deployment --path #{@bundle_path}`
   end
 
   def run_tests
