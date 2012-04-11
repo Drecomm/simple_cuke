@@ -12,10 +12,10 @@ class ConsoleReporter
 private
 
   def green(str)
-    puts "\033[32m#{str}\033[30m"
+    puts "\033[32m#{str}\033[0m"
   end
 
   def red(str)
-    puts "\033[31m#{str}\033[30m"
+    puts "\033[31m#{str}\033[0m"
   end
 end
